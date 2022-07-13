@@ -24,15 +24,16 @@
 
 ## Пример:
 
+>```
 >std::list<int> l = {1,2,3,4,5,6,7,8,9,10};  
 >// параллельное суммирование в 3 потока  
->```
+>
 >auto sum = map_reduce(l.begin(), l.end(),   
 >             [](int i){return i;},   
 >             std::plus<int>(), 3);    
->```
+>
 >// проверка наличия чётных чисел в четыре потока  
->```
+>
 >auto has_even = map_reduce(l.begin(), l.end(),   
 >                [](int i){return i % 2 == 0;}, 
 >                std::logical_or<bool>(), 4);

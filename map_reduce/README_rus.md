@@ -11,26 +11,33 @@
 > * количество потоков.
 
 >Результат вызова map_reduce  
->`auto res = map_reduce(p, q, f1, f2, num);`  
+>```
+>auto res = map_reduce(p, q, f1, f2, num);
+>```
 >должен быть эквивалентен результату следующего кода:
->
->`auto res = f1(*p);`  
->`while(++p != q)`  
->`    res = f2(res, f1(*p));`  
+>```
+>auto res = f1(*p);
+>while(++p != q)
+>    res = f2(res, f1(*p));
+>```
 >только выполнение этого кода должно быть разбито на num потоков.
 
 ## Пример:
 
 >std::list<int> l = {1,2,3,4,5,6,7,8,9,10};  
 >// параллельное суммирование в 3 потока  
->`auto sum = map_reduce(l.begin(), l.end(),`   
->             `[](int i){return i;},`   
->             `std::plus<int>(), 3);`    
->
+>```
+>auto sum = map_reduce(l.begin(), l.end(),   
+>             [](int i){return i;},   
+>             std::plus<int>(), 3);    
+>```
 >// проверка наличия чётных чисел в четыре потока  
->`auto has_even = map_reduce(l.begin(), l.end(),`   
->                 `[](int i){return i % 2 == 0;},` 
->                `std::logical_or<bool>(), 4);`  
+>```
+>auto has_even = map_reduce(l.begin(), l.end(),   
+>                [](int i){return i % 2 == 0;}, 
+>                std::logical_or<bool>(), 4);
+>```
+
 
 ## Гарантии:
 

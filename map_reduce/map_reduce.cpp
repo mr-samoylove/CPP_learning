@@ -35,8 +35,7 @@ auto map_reduce(IT begin, IT end, lambdaUnary f1, lambdaBinary f2, size_t thread
     while (threads_amount--) {
         v.emplace_back(std::async(std::launch::async, map_reduce_help<IT, lambdaUnary, lambdaBinary>, from, to, f1, f2));
 
-        if (to == end) break;
-        else
+        if (to != end)
         {
             from = to;
             to = (threads_amount == 1) ? end : std::next(from, tasks_per_thread);

@@ -10,6 +10,8 @@ private:
     using list_it = typename ListT::const_iterator;
     using vect_it = typename VectT::const_iterator;
 
+    ListT data_;
+
 public:
     VectorList() = default;
     VectorList(VectorList const&) = default;
@@ -111,7 +113,4 @@ public:
     const_reverse_iterator rend() const {
         return const_reverse_iterator(begin());
     }
-
-private:
-    ListT data_;
 };
